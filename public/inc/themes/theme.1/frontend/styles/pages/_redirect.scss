@@ -1,0 +1,23 @@
+.redirect {
+    min-width: 300px;
+    margin: side-values(100px auto 0 auto);
+
+    &__title {
+        margin: 0;
+        font-family: var(--heading-font-stack);
+        font-size: var(--font-size-larger);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    &__message {
+        padding: var(--spacing-6);
+        margin: var(--spacing-3) 0;
+        background: var(--background-default);
+        border-radius: var(--border-radius);
+    }
+
+    &__link {
+        font-size: var(--font-size-small);
+        text-align: center;
+    }
+}

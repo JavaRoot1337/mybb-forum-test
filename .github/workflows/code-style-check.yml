@@ -13,4 +13,4 @@ jobs:
             with:
                 php-version: '8.3'
                 tools: cs2pr, phpcs
-          - run: phpcs -q --report=checkstyle --standard=phpcs.xml | cs2pr
+          - run: phpcs -q --report=checkstyle --standard=config/phpcs.xml | cs2pr

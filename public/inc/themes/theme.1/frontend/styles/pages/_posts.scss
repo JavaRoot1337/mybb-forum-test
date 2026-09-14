@@ -1,0 +1,380 @@
+// these values are used to change border width with post status styles
+$avatar-margin-small: 80px;
+$avatar-margin-medium: 110px;
+
+.post-list {
+    clear: both;
+}
+
+.post {
+    margin-bottom: var(--spacing-6);
+    background-color: var(--background-default);
+    border: var(--border-width-base) solid var(--border-color-1);
+    border-radius: var(--border-radius);
+    @include box-shadow;
+
+    @include bp-small {
+        margin-#{$left}: $avatar-margin-small;
+        min-height: 40px;
+
+        @include bp-small {
+            min-height: 70px;
+        }
+
+        @include bp-medium {
+            min-height: 100px;
+        }
+    }
+
+    @include bp-medium {
+        margin-#{$left}: $avatar-margin-medium;
+    }
+
+    &--no-avatar {
+        margin-#{$left}: 0;
+    }
+
+    &__meta {
+        padding: side-values(var(--spacing-4) var(--spacing-5) var(--spacing-1) var(--spacing-5));
+    }
+
+    &__author {
+        margin: 0;
+        font-size: var(--font-size-regular);
+
+        @include bp-small {
+            display: inline-block;
+        }
+    }
+
+    &__date,
+    &__topic {
+        font-size: var(--font-size-smaller);
+        color: var(--alt-font-color-1);
+
+        &:link,
+        &:visited {
+            color: var(--alt-font-color-1);
+        }
+
+        @include bp-small {
+            margin: side-values(0 0 0 var(--spacing-3));
+        }
+    }
+
+    &__edit-log {
+        margin-#{$left}: var(--spacing-2);
+        font-size: var(--font-size-smaller);
+
+        &:link,
+        &:visited {
+            color: var(--alt-font-color-2);
+        }
+
+        &:hover {
+            color: var(--link-hover-color);
+        }
+    }
+
+    &__edit-reason {
+        color: var(--alt-font-color-1);
+        margin-#{$left}: var(--spacing-2);
+        font-size: var(--font-size-smaller);
+    }
+
+    &__ip-address {
+        float: $right;
+        font-size: var(--font-size-smaller);
+
+        &:link,
+        &:visited {
+            color: var(--alt-font-color-2);
+        }
+
+        &:hover {
+            color: var(--link-hover-color);
+        }
+    }
+
+    &__messenger-meta {
+        padding: side-values(0 0 var(--spacing-2) 0);
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-1);
+        border-bottom: var(--border-width-base) solid var(--border-color-3);
+    }
+
+    &__inline-mod {
+        float: $right;
+        margin: side-values(-20px 0 0 var(--spacing-3));
+
+        @include bp-small {
+            margin-top: var(--spacing-3);
+        }
+    }
+
+    &__badge {
+        display: none;
+
+        @include bp-medium {
+            display: inline;
+        }
+    }
+
+    .avatar-profile-link {
+        float: $left;
+        margin: side-values(5px 10px 0 0);
+        border-radius: var(--border-radius);
+        @include box-shadow;
+        @include avatar(40);
+
+        @include bp-small {
+            float: $left;
+            margin: side-values(-13px 0 0 -100px);
+            @include avatar(70);
+        }
+
+        @include bp-medium {
+            margin-#{$left}: -130px;
+            @include avatar(100);
+        }
+    }
+
+    &__body {
+        padding: side-values(var(--spacing-3) var(--spacing-5) var(--spacing-5) var(--spacing-5));
+
+        img {
+            max-width: 100%;
+        }
+
+        &--message {
+            color: var(--alt-font-color-1);
+        }
+
+        textarea {
+            box-sizing: border-box;
+            width: 100% !important;
+        }
+
+        // Quick edit reason
+        .editreason {
+            margin-top: var(--spacing-3);
+            margin-bottom: var(--spacing-3);
+            font-size: var(--font-size-small);
+            color: var(--alt-font-color-1);
+
+            label {
+                cursor: pointer;
+            }
+        }
+
+        // Quick edit submit button
+        button[type="submit"] {
+            @extend .button, .button--inline;
+            margin-#{$left}: 0;
+        }
+
+        // Quick edit cancel button
+        button[type="cancel"] {
+            @extend .button, .button--inline, .button--secondary, .button--danger;
+            margin-#{$left}: var(--spacing-4);
+        }
+    }
+
+    .quote,
+    .codeblock,
+    .attachments {
+        padding: var(--spacing-4) var(--spacing-5);
+        margin: var(--spacing-2) 0;
+        font-size: var(--font-size-small);
+        background: var(--background-2);
+        border-radius: var(--border-radius);
+
+        .quote,
+        .codeblock {
+            border: var(--border-width-base) solid var(--border-color-1);
+        }
+
+        blockquote {
+            margin: 0;
+        }
+
+        &__cite,
+        &__title {
+            display: block;
+            margin-top: 0;
+            margin-bottom: var(--spacing-2);
+            font-style: normal;
+            font-weight: var(--font-weight-semibold);
+            color: var(--alt-font-color-1);
+        }
+
+        &__jump {
+            margin-#{$left}: var(--spacing-2);
+        }
+
+        &__date {
+            float: $right;
+            font-size: var(--font-size-smaller);
+            font-weight: var(--font-weight-normal);
+        }
+    }
+
+    .attachments {
+        margin-top: var(--spacing-6);
+
+        &__subtitle {
+            margin: 0;
+            font-size: var(--font-size-smaller);
+            font-weight: var(--font-weight-medium);
+        }
+    }
+
+    .attachment {
+        margin: var(--spacing-3) 0;
+
+        &--image {
+            box-sizing: border-box;
+            padding: var(--spacing-2);
+            background: var(--background-default);
+            border: var(--border-width-base) solid var(--border-color-1);
+        }
+
+        &__icon {
+            margin-#{$right}: var(--spacing-3);
+        }
+
+        &__data {
+            margin-#{$left}: var(--spacing-3);
+            font-size: var(--font-size-smaller);
+            color: var(--alt-font-color-1);
+        }
+    }
+
+    &__signature {
+        padding-top: var(--spacing-3);
+        margin-top: var(--spacing-5);
+        font-size: var(--font-size-smaller);
+        border-top: var(--border-width-base) solid var(--border-color-3);
+    }
+
+    &__foot {
+        padding: side-values(var(--spacing-2) var(--spacing-4) var(--spacing-3) var(--spacing-4));
+        margin: 0;
+        list-style: none;
+        background: var(--background-1);
+        border-top: var(--border-width-base) solid var(--border-color-3);
+        border-radius: corner-values(0 0 calc(var(--border-radius) - var(--border-width-base)) calc(var(--border-radius) - var(--border-width-base)));
+
+        &--controls {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &--highlight,
+    &--soft-deleted,
+    &--awaiting-approval {
+        margin: side-values(
+            calc(var(--border-width-base) - var(--border-width-thick))
+            calc(var(--border-width-base) - var(--border-width-thick))
+            calc(var(--spacing-6) - calc(var(--border-width-thick) - var(--border-width-base)))
+            calc(var(--border-width-base) - var(--border-width-thick)));
+        border-width: var(--border-width-thick);
+
+        @include bp-small {
+            margin-#{$left}: $avatar-margin-small - 1;
+        }
+
+        @include bp-medium {
+            margin-#{$left}: $avatar-margin-medium - 1;
+        }
+    }
+
+    &--highlight {
+        border-color: var(--secondary-color);
+    }
+
+    &--deleted {
+        border-color: var(--status-deleted-border-color);
+    }
+
+    &--awaiting-approval {
+        border-color: var(--status-pending-border-color);
+    }
+
+    &--message {
+        background: var(--background-1);
+    }
+
+    &__message-button {
+        display: none;
+        margin: side-values(var(--spacing-2) calc(-1 * var(--spacing-2)) 0 calc(-1 * var(--spacing-2)));
+    }
+
+    // TODO: change classes in code
+    &.trow_selected {
+        @extend .post--highlight;
+    }
+
+    &.unapproved_post {
+        @extend .post--awaiting-approval;
+    }
+
+    &.deleted_post,
+    &.unapproved_post.deleted_post {
+        @extend .post--deleted;
+    }
+
+    &--hidden {
+
+        @include bp-small {
+
+            .avatar-profile-link {
+                margin-#{$left}: -80px;
+                @include avatar(50);
+            }
+        }
+
+        .post__meta {
+            padding-bottom: var(--spacing-1);
+        }
+
+        .post__body,
+        .post__controls {
+            display: none;
+        }
+    }
+}
+
+.user-status {
+    display: inline-block;
+    margin-#{$left}: var(--spacing-1);
+    font-size: var(--font-size-smallest);
+    vertical-align: middle;
+
+    &--offline {
+        color: var(--alt-font-color-3);
+    }
+
+    &--online {
+        color: var(--success-color);
+
+        .user-status__link {
+            color: var(--success-color);
+        }
+    }
+
+    &--away {
+        color: var(--danger-color);
+
+        .user-status__link {
+            color: var(--danger-color);
+        }
+    }
+}
+
+.highlight {
+    padding-top: var(--spacing-1);
+    padding-bottom: var(--spacing-1);
+    background: var(--text-highlight-color);
+}

@@ -1,0 +1,111 @@
+.row {
+    position: relative;
+    padding: var(--spacing-4);
+    line-height: var(--line-height-small);
+    border-bottom: var(--border-width-base) solid var(--border-color-1);
+
+    @include bp-medium {
+        padding: var(--spacing-4) var(--spacing-5);
+    }
+
+    &--form {
+        padding: var(--spacing-5) var(--spacing-4);
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &:last-child {
+            padding-bottom: var(--spacing-3);
+            border-bottom: 0;
+        }
+    }
+
+    &--compact {
+        padding-top: var(--spacing-2);
+        padding-bottom: var(--spacing-2);
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+
+    &--information {
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-1);
+    }
+
+    &--no-border {
+        border: none;
+    }
+
+    &--simple-columns {
+        display: grid;
+        gap: var(--spacing-3) var(--spacing-5);
+        grid-template-areas:
+                "primary"
+                "secondary";
+
+        @include bp-small {
+            grid-template-columns: 1fr auto;
+            grid-template-areas:
+                "primary secondary";
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &:has(.row__checkbox) {
+            grid-template-columns: 1fr min-content;
+            grid-template-areas:
+                "primary check"
+                "secondary secondary";
+
+            @include bp-small {
+                grid-template-columns: 1fr auto min-content;
+                grid-template-areas:
+                    "primary secondary check";
+            }
+        }
+    }
+
+    &--selected {
+        background-color: var(--status-highlight-background-color);
+        border-color: var(--status-highlight-border-color);
+    }
+
+    &:has(.checkbox--select-row:checked) {
+        @extend .row--selected;
+    }
+
+    &__primary {
+        grid-area: primary;
+    }
+
+    &__secondary {
+        grid-area: secondary;
+
+        @include bp-small-max {
+            padding: side-values(var(--spacing-3) var(--spacing-4));
+            background: var(--background-1);
+            border-radius: var(--border-radius);
+        }
+    }
+
+    &__controls {
+        grid-area: secondary;
+    }
+    
+    &__checkbox {
+        grid-area: check;
+        align-self: self-start;
+
+        @include bp-small {
+            align-self: center;
+        }
+    }
+
+    &__description {
+        margin: 0;
+        font-size: var(--font-size-small);
+    }
+}

@@ -1,0 +1,35 @@
+.form {
+
+    &--modal {
+        margin-bottom: 0;
+        border: none;
+    }
+
+    &--delete {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: var(--spacing-5) var(--spacing-4);
+        margin-bottom: var(--spacing-7);
+
+        @include bp-small {
+            align-items: center;
+            flex-direction: row;
+            gap: var(--spacing-4);
+        }
+
+        .option-field {
+            flex-grow: 1;
+        }
+
+        .form__submit {
+            flex-shrink: 0;
+            align-self: center;
+        }
+    }
+
+    &--compact {
+        line-height: 0;
+    }
+}

@@ -1,0 +1,23 @@
+{% extends '@frontend/layouts/master.twig' %}
+
+{% block head %}
+    <title>{{ lang.javaroot_resource_create }} - {{ mybb.settings.bbname }}</title>
+{% endblock head %}
+
+{% block body %}
+    <section class="block javaroot-card javaroot-resource-card">
+        <h1 class="title">{{ lang.javaroot_resource_create }}</h1>
+        <form method="post" action="{{ mybb.settings.bburl }}/resources.php?action=save">
+            <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" />
+            <div class="row row--form field"><label class="field__name" for="title">{{ lang.javaroot_resource_title }}</label><input class="textbox" id="title" name="title" required maxlength="180" /></div>
+            <div class="row row--form field"><label class="field__name" for="summary">{{ lang.javaroot_resource_summary }}</label><input class="textbox" id="summary" name="summary" maxlength="500" /></div>
+            <div class="row row--form field"><label class="field__name" for="description">{{ lang.javaroot_resource_description }}</label><textarea class="textarea" id="description" name="description" rows="8" required></textarea></div>
+            <div class="row row--form field"><label class="field__name" for="category">{{ lang.javaroot_resource_category }}</label><select id="category" name="category" required>{% for category in categories %}<option value="{{ category.cid }}">{{ category.name }}</option>{% endfor %}</select></div>
+            <div class="row row--form field"><label class="field__name" for="version">{{ lang.javaroot_resource_version }}</label><input class="textbox" id="version" name="version" required maxlength="80" /></div>
+            <div class="row row--form field"><label class="field__name" for="minecraft_versions">{{ lang.javaroot_resource_minecraft }}</label><input class="textbox" id="minecraft_versions" name="minecraft_versions" maxlength="255" placeholder="1.21, 1.21.1" /></div>
+            <div class="row row--form field"><label class="field__name" for="changelog">{{ lang.javaroot_resource_changelog }}</label><textarea class="textarea" id="changelog" name="changelog" rows="5"></textarea></div>
+            <div class="row row--form field"><label class="field__name" for="external_url">{{ lang.javaroot_resource_external }}</label><input class="textbox" id="external_url" name="external_url" type="url" placeholder="https://github.com/..." /></div>
+            <button class="button button--medium" type="submit">{{ lang.javaroot_resource_publish }}</button>
+        </form>
+    </section>
+{% endblock body %}

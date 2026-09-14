@@ -1,0 +1,158 @@
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="wrapper wrapper--footer">
+            {% if constant("THIS_SCRIPT") != "index.php" %}
+                {{ build_breadcrumb_navigation('breadcrumb--footer') }}
+            {% endif %}
+            <div class="footer__selectors">
+                <div class="theme form form--compact multi-field javaroot-theme-selector">
+                    <form method="post" action="{{ mybb.settings.bburl }}/javaroot-theme.php">
+                        <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" />
+                        <input type="hidden" name="return_url" value="{{ mybb.settings.bburl }}/index.php" />
+                        <div class="select-field">
+                            <label class="sr-only" for="javaroot_theme">{{ lang.javaroot_theme }}</label>
+                            <select name="theme" id="javaroot_theme" onchange="this.form.submit()">
+                                <option value="ordinary"{% if get('javaroot_theme') == 'ordinary' %} selected{% endif %}>{{ lang.javaroot_theme_ordinary }}</option>
+                                <option value="dark"{% if get('javaroot_theme') == 'dark' %} selected{% endif %}>{{ lang.javaroot_theme_dark }}</option>
+                                <option value="night"{% if get('javaroot_theme') == 'night' %} selected{% endif %}>{{ lang.javaroot_theme_night }}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                {% if mybb.settings.footer.langselect.options is iterable and mybb.settings.footer.langselect.options|length > 1 %}
+                    <div class="language form form--compact multi-field">
+                        <form method="post" action="{{ mybb.settings.footer.langselect.current_url.location }}" id="lang_select">
+                            <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" />
+                            {% for name, field in mybb.input %}
+                                {% if name != 'language' and name is not iterable and value is not iterable and value %}
+                                    <input type="hidden" name="{{ name }}" value="{{ value }}" />
+                                {% endif %}
+                            {% endfor %}
+                            <div class="select-field">
+                                {{ include('partials/icon.twig', {icon: 'sort', class: 'select-field__icon'}, with_context = false) }}
+                                <select name="language" onchange="MyBB.changeLanguage();">
+                                    <optgroup label="{{ lang.select_language }}">
+                                        {% for key, language in mybb.settings.footer.langselect.options %}
+                                        	{{ language }}
+                                            <option value="{{ key }}"{% if lang.language == key %} selected{% endif %}>{{ language }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <input type="submit" class="button button--inline" value="{{ lang.go }}" />
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% if mybb.settings.footer.themeselect is iterable and mybb.settings.footer.themeselect|length > 1 %}
+                    <div class="theme form form--compact multi-field">
+                        <form method="post" action="{{ mybb.settings.footer.themeselect.current_url.location }}" id="theme_select">
+                            <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" />
+                            {% if mybb.settings.footer.themeselect.options %}
+                                {% for name, field in mybb.input %}
+                                    {% if name != 'theme' and name is not iterable and value is defined and value is not iterable and value %}
+                                        <input type="hidden" name="{{ name }}" value="{{ value }}" />
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <div class="select-field">
+                                {{ include('partials/icon.twig', {icon: 'sort', class: 'select-field__icon'}, with_context = false) }}
+                                {{ mybb.settings.footer.themeselect.options|raw }}
+                            </div>
+                            <input type="submit" class="button button--inline" value="{{ lang.go }}" />
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            <debugstuff>
+        </div>
+        <div class="footer__navigation">
+            <div class="wrapper">
+                <nav class="footer-menu">
+                    <ul class="footer-menu__links">
+                        <li class="footer-menu__item">
+                            <a href="{{ mybb.settings.bburl }}/javaroot-theme.php" class="footer-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'paint-brush', class: 'footer-menu__icon'}, with_context = false) }}
+                                <span class="footer-menu__text">{{ lang.javaroot_theme_settings }}</span>
+                            </a>
+                        </li>
+                        {% if (mybb.settings.enableshowteam) %}
+                            <li class="footer-menu__item">
+                                <a href="showteam.php" class="footer-menu__link">
+                                    {{ include('partials/icon.twig', {icon: 'address-book', class: 'button__icon'}, with_context = false) }}
+                                    <span class="footer-menu__text">{{ lang.bottomlinks_forumteam }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if (mybb.settings.contactlink == "contact.php" and mybb.settings.contact and (mybb.settings.contact_guests != 1 and mybb.user.uid == 0 or mybb.user.uid > 0)) or mybb.settings.contactlink != "contact.php" %}
+                            <li class="footer-menu__item">
+                                <a href="{{ mybb.settings.contactlink }}" class="footer-menu__link">
+                                    {{ include('partials/icon.twig', {icon: 'envelope', class: 'footer-menu__icon'}, with_context = false) }}
+                                    <span class="footer-menu__text">{{ lang.bottomlinks_contactus }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if mybb.settings.homeurl and mybb.settings.homename %}
+                            <li class="footer-menu__item">
+                                <a href="{{ mybb.settings.homeurl }}" class="footer-menu__link">
+                                    {{ include('partials/icon.twig', {icon: 'home', class: 'footer-menu__icon'}, with_context = false) }}
+                                    <span class="footer-menu__text">{{ mybb.settings.homename }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="footer-menu__item">
+                            <a href="#top" class="footer-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'arrow-up', class: 'footer-menu__icon'}, with_context = false) }}
+                                <span class="footer-menu__text">{{ lang.bottomlinks_returntop }}</span>
+                            </a>
+                        </li>
+                        <li class="footer-menu__item">
+                            <a href="{{ mybb.settings.bburl }}/misc.php?action=markread{% if mybb.user.uid %}&amp;my_post_key={{ mybb.post_code }}{% endif %}" class="footer-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'dot-circle', class: 'footer-menu__icon'}, with_context = false) }}
+                                <span class="footer-menu__text">{{ lang.bottomlinks_markread }}</span>
+                            </a>
+                        </li>
+                        <li class="footer-menu__item">
+                            <a href="{{ mybb.settings.bburl }}/misc.php?action=syndication" class="footer-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'rss-square', class: 'footer-menu__icon'}, with_context = false) }}
+                                <span class="footer-menu__text">{{ lang.bottomlinks_syndication }}</span>
+                            </a>
+                        </li>
+                        <li class="footer-menu__item">
+                            <a href="{{ mybb.settings.bburl }}/misc.php?action=help" class="footer-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'question-circle', class: 'footer-menu__icon'}, with_context = false) }}
+                                <span class="footer-menu__text">{{ lang.bottomlinks_help }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="footer__copyright">
+            <div class="wrapper">
+                <p class="powered-by">
+                    {# MyBB is free software developed and maintained by a volunteer community.
+
+                       We would appreciate it if you left the full "powered by" notice below
+                       intact to show your support for MyBB.
+
+                       If you choose to remove or modify the powered by notice below, you may
+                       be refused support on the MyBB Community Forums.
+
+                       This is free software; support us and we'll support you.
+                    #}
+                    {{ lang.powered_by }} <a href="https://mybb.com" rel="noopener" class="powered-by__link" title="{{ lang.powered_by_desc }}">MyBB{% if mybb.settings.showvernum %} {{ mybb.version }}{% endif %}</a>
+                    {# End powered by #}
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    {# The following piece of code allows MyBB to run scheduled tasks. DO NOT REMOVE #}
+        {% if task_image is not empty %}
+            <img src="{{ task_image }}" width="1" height="1" alt="" />
+        {% endif %}
+    {# End task image code. #}
+</div>

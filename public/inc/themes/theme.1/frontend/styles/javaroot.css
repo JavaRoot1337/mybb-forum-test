@@ -1,0 +1,228 @@
+:root {
+    --javaroot-accent: #087ec2;
+    --javaroot-accent-dark: #05669c;
+    --javaroot-radius: 4px;
+}
+
+html.scheme-night {
+    --background-default--night: #090b0d;
+    --content-background--night: #111417;
+    --header-background--night: #0c1013;
+    --header-background-shade-1--night: #07090b;
+    --user-bar-background--night: #111417;
+    --user-bar-background-shade-1--night: #0b0e10;
+    --background-1--night: #151a1e;
+    --background-2--night: #1b2126;
+    --background-3--night: #22292f;
+    --background-4--night: #303941;
+    --shade-1--night: #edf1f4;
+    --shade-2--night: #c2cbd2;
+    --shade-3--night: #8d9aa3;
+    --shade-4--night: #697781;
+    --shade-5--night: #4b5760;
+    --shade-6--night: #364047;
+    --shade-7--night: #293137;
+    --shade-8--night: #20272c;
+    --shade-9--night: #151a1e;
+    --shade-10--night: #090b0d;
+    --font-color--night: var(--shade-1--night);
+    --alt-font-color-1--night: var(--shade-2--night);
+    --alt-font-color-2--night: var(--shade-3--night);
+    --alt-font-color-3--night: var(--shade-4--night);
+    --background-default--night: var(--shade-10--night);
+    --content-background--night: var(--shade-9--night);
+    --header-background--night: var(--shade-7--night);
+    --header-background-shade-1--night: var(--shade-8--night);
+    --user-bar-background--night: var(--shade-9--night);
+    --user-bar-background-shade-1--night: var(--shade-10--night);
+    --major-title-background--night: var(--primary-color--night);
+    --background-1--night: var(--shade-9--night);
+    --background-2--night: var(--shade-8--night);
+    --background-3--night: var(--shade-7--night);
+    --background-4--night: var(--shade-6--night);
+    --border-color-1--night: var(--shade-7--night);
+    --border-color-2--night: var(--shade-5--night);
+    --border-color-3--night: var(--shade-8--night);
+    --border-color-4--night: var(--shade-4--night);
+    --primary-color--night: #168bd0;
+    --primary-color-shade-1--night: #0c6ea9;
+    --secondary-color--night: #ff8b1a;
+    --secondary-color-shade-1--night: #c86d0d;
+    --link-default-color--night: #65bdf0;
+    --link-hover-color--night: #ffae50;
+    --button-default-color--night: #168bd0;
+    --button-hover-color--night: #0c6ea9;
+    --invert-color--night: #fff;
+    --invert-font-color--night: #fff;
+    --major-title-border--night: var(--primary-color-shade-1--night);
+    --status-new-icon-color--night: var(--primary-color--night);
+    --status-highlight-background-color--night: #18313f;
+    --status-highlight-border-color--night: #28617c;
+    --status-deleted-background-color--night: #3a2858;
+    --status-deleted-border-color--night: #9b6fe8;
+    --status-deleted-font-color--night: #fff;
+    --status-pending-background-color--night: #553137;
+    --status-pending-border-color--night: #e76b70;
+    --status-pending-font-color--night: #fff;
+    --status-unread-color--night: #e76b70;
+    --success-color--night: #75c93d;
+    --success-color-shade-1--night: #5aa528;
+    --moderate-color--night: #e47a35;
+    --moderate-color-shade-1--night: #b95c25;
+    --danger-color--night: #ee6267;
+    --danger-color-shade-1--night: #c94b50;
+
+    --primary-color: var(--primary-color--night);
+    --primary-color-shade-1: var(--primary-color-shade-1--night);
+    --secondary-color: var(--secondary-color--night);
+    --secondary-color-shade-1: var(--secondary-color-shade-1--night);
+    --invert-color: var(--invert-color--night);
+    --shade-1: var(--shade-1--night);
+    --shade-2: var(--shade-2--night);
+    --shade-3: var(--shade-3--night);
+    --shade-4: var(--shade-4--night);
+    --shade-5: var(--shade-5--night);
+    --shade-6: var(--shade-6--night);
+    --shade-7: var(--shade-7--night);
+    --shade-8: var(--shade-8--night);
+    --shade-9: var(--shade-9--night);
+    --shade-10: var(--shade-10--night);
+    --font-color: var(--font-color--night);
+    --invert-font-color: var(--invert-font-color--night);
+    --alt-font-color-1: var(--alt-font-color-1--night);
+    --alt-font-color-2: var(--alt-font-color-2--night);
+    --alt-font-color-3: var(--alt-font-color-3--night);
+    --text-highlight-color: #f0e96a;
+    --link-default-color: var(--link-default-color--night);
+    --link-hover-color: var(--link-hover-color--night);
+    --button-default-color: var(--button-default-color--night);
+    --button-hover-color: var(--button-hover-color--night);
+    --background-default: var(--background-default--night);
+    --content-background: var(--content-background--night);
+    --header-background: var(--header-background--night);
+    --header-background-shade-1: var(--header-background-shade-1--night);
+    --user-bar-background: var(--user-bar-background--night);
+    --user-bar-background-shade-1: var(--user-bar-background-shade-1--night);
+    --major-title-background: var(--major-title-background--night);
+    --background-1: var(--background-1--night);
+    --background-2: var(--background-2--night);
+    --background-3: var(--background-3--night);
+    --background-4: var(--background-4--night);
+    --major-title-border: var(--major-title-border--night);
+    --border-color-1: var(--border-color-1--night);
+    --border-color-2: var(--border-color-2--night);
+    --border-color-3: var(--border-color-3--night);
+    --border-color-4: var(--border-color-4--night);
+    --status-new-icon-color: var(--status-new-icon-color--night);
+    --status-highlight-background-color: var(--status-highlight-background-color--night);
+    --status-highlight-border-color: var(--status-highlight-border-color--night);
+    --status-deleted-background-color: var(--status-deleted-background-color--night);
+    --status-deleted-border-color: var(--status-deleted-border-color--night);
+    --status-deleted-font-color: var(--status-deleted-font-color--night);
+    --status-pending-background-color: var(--status-pending-background-color--night);
+    --status-pending-border-color: var(--status-pending-border-color--night);
+    --status-pending-font-color: var(--status-pending-font-color--night);
+    --status-unread-color: var(--status-unread-color--night);
+    --success-color: var(--success-color--night);
+    --success-color-shade-1: var(--success-color-shade-1--night);
+    --moderate-color: var(--moderate-color--night);
+    --moderate-color-shade-1: var(--moderate-color-shade-1--night);
+    --danger-color: var(--danger-color--night);
+    --danger-color-shade-1: var(--danger-color-shade-1--night);
+}
+
+.header {
+    border-top: 3px solid var(--javaroot-accent);
+}
+
+.main-menu__item--active .main-menu__link,
+.main-menu__link:hover,
+.user-bar__link:hover {
+    color: var(--javaroot-accent);
+}
+
+.footer__selectors form {
+    margin: 0;
+}
+
+.javaroot-theme-selector select {
+    min-width: 130px;
+}
+
+.javaroot-card {
+    background: var(--background-1);
+    border: 1px solid var(--border-color-1);
+    border-radius: var(--javaroot-radius);
+}
+
+.javaroot-theme-page {
+    padding: 24px;
+}
+
+.javaroot-resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.javaroot-section-heading {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.javaroot-section-heading .title {
+    margin: 0;
+}
+
+.javaroot-card a:focus-visible,
+.javaroot-card button:focus-visible,
+.javaroot-card input:focus-visible,
+.javaroot-card select:focus-visible,
+.javaroot-card textarea:focus-visible {
+    outline: 3px solid var(--javaroot-accent);
+    outline-offset: 2px;
+}
+
+.javaroot-resource-card {
+    padding: 18px;
+}
+
+.javaroot-resource-card h2,
+.javaroot-resource-card h3 {
+    margin-top: 0;
+}
+
+.javaroot-resource-meta {
+    color: var(--alt-font-color-2);
+    font-size: .9em;
+}
+
+@media (max-width: 700px) {
+    .wrapper--header,
+    .wrapper--user-bar {
+        min-width: 0;
+    }
+
+    .javaroot-resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .javaroot-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

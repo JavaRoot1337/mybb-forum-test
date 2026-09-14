@@ -1,0 +1,4 @@
+parameters:
+    paths:
+        - ../public/inc/src/
+        - ../tests/

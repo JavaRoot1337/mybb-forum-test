@@ -1,0 +1,90 @@
+.poll {
+    margin-bottom: var(--spacing-6);
+
+    &__tag {
+        display: inline-block;
+        float: $right;
+        padding: var(--spacing-2) var(--spacing-3);
+        margin-#{$right}: calc(-1 * var(--spacing-2));
+        font-size: var(--font-size-smallest);
+        font-weight: var(--font-weight-normal);
+        text-transform: uppercase;
+        border: var(--border-width-base) solid var(--invert-color);
+        border-radius: var(--border-radius);
+    }
+
+    &__options {
+        padding: 0;
+    }
+
+    &__row {
+        padding-top: var(--spacing-3);
+        padding-bottom: var(--spacing-3);
+
+        &--cast-vote {
+            padding: 0;
+
+            .poll__input {
+                float: $left;
+                margin: side-values(6px 0 0 -26px);
+            }
+
+            label {
+                display: block;
+                padding: side-values(10px 12px 12px 40px);
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__your-vote {
+        margin-#{$left}: var(--spacing-2);
+        color: var(--primary-color);
+    }
+
+    &__option {
+        float: $left;
+        margin-bottom: var(--spacing-3);
+    }
+
+    &__votes {
+        position: relative;
+        box-sizing: border-box;
+        height: var(--spacing-6);
+        margin: var(--spacing-3) 0;
+        clear: both;
+        background: var(--background-1);
+        border-radius: var(--border-radius);
+    }
+
+    &__bar {
+        position: absolute;
+        top: 0;
+        #{$left}: 0;
+        bottom: 0;
+        z-index: 1;
+        box-sizing: border-box;
+        background: var(--primary-color);
+        border-radius: var(--border-radius);
+    }
+
+    &__count {
+        float: $right;
+        margin-bottom: var(--spacing-3);
+        font-size: var(--font-size-small);
+    }
+
+    &__users {
+        font-size: var(--font-size-small);
+    }
+
+    &__vote {
+        justify-content: space-between;
+    }
+
+    &__total {
+        @include bp-medium-max {
+            order: -1;
+        }
+    }
+}

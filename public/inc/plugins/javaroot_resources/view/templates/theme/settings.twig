@@ -1,0 +1,24 @@
+{% extends '@frontend/layouts/master.twig' %}
+
+{% block head %}
+    <title>{{ lang.javaroot_theme_settings }} - {{ mybb.settings.bbname }}</title>
+{% endblock head %}
+
+{% block body %}
+    <section class="block javaroot-card javaroot-theme-page">
+        <h1 class="title">{{ lang.javaroot_theme_settings }}</h1>
+        <p>{{ lang.javaroot_theme }}</p>
+        <div class="javaroot-resource-grid">
+            {% for theme in themes %}
+                <form method="post" action="{{ mybb.settings.bburl }}/javaroot-theme.php" class="javaroot-card javaroot-resource-card">
+                    <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" />
+                    <input type="hidden" name="theme" value="{{ theme.id }}" />
+                    <input type="hidden" name="return_url" value="{{ mybb.settings.bburl }}/javaroot-theme.php" />
+                    <h2>{{ theme.name }}</h2>
+                    <p>{{ theme.description }}</p>
+                    <button type="submit" class="button button--medium">{% if current == theme.id %}{{ lang.javaroot_theme_selected }}{% else %}{{ lang.javaroot_theme_select }}{% endif %}</button>
+                </form>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock body %}

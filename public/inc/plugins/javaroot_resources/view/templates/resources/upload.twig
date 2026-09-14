@@ -1,0 +1,80 @@
+{% extends '@frontend/layouts/master.twig' %}
+
+{% block head %}
+    <title>{{ lang.javaroot_resource_file }} - {{ mybb.settings.bbname }}</title>
+{% endblock head %}
+
+{% block body %}
+    <section class="block javaroot-card javaroot-resource-card">
+        <h1 class="title">{{ lang.javaroot_resource_file }}</h1>
+        <p>{{ resource.title }}</p>
+        <form id="javaroot-upload" method="post" enctype="application/octet-stream" action="{{ mybb.settings.bburl }}/resources.php?action=upload_init">
+            <input type="hidden" name="my_post_key" value="{{ post_key }}" />
+            <input type="hidden" name="rid" value="{{ resource.rid }}" />
+            <input type="hidden" name="vid" value="{{ vid }}" />
+            <input id="javaroot-file" type="file" accept=".jar,.zip,.rar" required />
+            <button class="button button--medium" type="submit">{{ lang.javaroot_resource_file }}</button>
+            <progress id="javaroot-progress" value="0" max="100" hidden></progress>
+            <p id="javaroot-upload-status" role="status"></p>
+        </form>
+    </section>
+{% endblock body %}
+
+{% block jscripts %}
+<script>
+(function () {
+    const form = document.getElementById('javaroot-upload');
+    const input = document.getElementById('javaroot-file');
+    const progress = document.getElementById('javaroot-progress');
+    const status = document.getElementById('javaroot-upload-status');
+    if (!form || !input) return;
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const file = input.files[0];
+        if (!file) return;
+        const data = new FormData(form);
+        data.append('filename', file.name);
+        data.append('size', file.size);
+        const storageKey = 'javaroot-upload-' + data.get('rid') + '-' + data.get('vid');
+        let session = null;
+        try {
+            const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+            if (saved && saved.filename === file.name && saved.size === file.size) {
+                const resumeData = new FormData();
+                resumeData.append('my_post_key', data.get('my_post_key'));
+                resumeData.append('token', saved.token);
+                const resume = await fetch('{{ mybb.settings.bburl }}/resources.php?action=upload_status', { method: 'POST', body: resumeData });
+                if (resume.ok) session = await resume.json();
+            }
+        } catch (error) {
+            localStorage.removeItem(storageKey);
+        }
+        if (!session) {
+            const init = await fetch(form.action, { method: 'POST', body: data });
+            session = await init.json();
+            if (!init.ok) { status.textContent = session.error || '{{ lang.javaroot_upload_error }}'; return; }
+            localStorage.setItem(storageKey, JSON.stringify({ token: session.token, filename: file.name, size: file.size }));
+        }
+        progress.hidden = false;
+        const chunkSize = session.chunk_size;
+        let offset = session.received_size || 0;
+        progress.value = Math.round(offset / file.size * 100);
+        while (offset < file.size) {
+            const chunk = file.slice(offset, Math.min(offset + chunkSize, file.size));
+            const response = await fetch('{{ mybb.settings.bburl }}/resources.php?action=upload_chunk', { method: 'POST', body: chunk, headers: { 'X-MyBB-Post-Key': data.get('my_post_key'), 'X-Upload-Token': session.token, 'X-Upload-Offset': String(offset) } });
+            const result = await response.json();
+            if (!response.ok) { status.textContent = result.error || '{{ lang.javaroot_upload_error }}'; return; }
+            offset = result.received_size;
+            progress.value = Math.round(offset / file.size * 100);
+        }
+        const finalData = new FormData();
+        finalData.append('my_post_key', data.get('my_post_key'));
+        finalData.append('token', session.token);
+        const complete = await fetch('{{ mybb.settings.bburl }}/resources.php?action=upload_finalize', { method: 'POST', body: finalData });
+        const result = await complete.json();
+        localStorage.removeItem(storageKey);
+        status.textContent = result.message || result.error || '';
+    });
+}());
+</script>
+{% endblock jscripts %}

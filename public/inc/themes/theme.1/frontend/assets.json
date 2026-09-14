@@ -1,0 +1,10 @@
+{
+	"assets": {
+		"styles/javaroot.css": {
+			"attached_to": [{"script": "global"}]
+		},
+		"scripts/javaroot.js": {
+			"attached_to": [{"script": "global"}]
+		}
+	}
+}

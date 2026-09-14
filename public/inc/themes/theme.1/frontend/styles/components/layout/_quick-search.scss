@@ -1,0 +1,125 @@
+// Quick search in forum header
+.quick-search {
+    display: none;
+    align-self: center;
+    width: 100%;
+
+    @include bp-medium {
+        display: block;
+        width: 35%;
+    }
+
+    @include bp-medium-max {
+        box-sizing: border-box;
+        position: absolute;
+        top: 100%;
+        padding: var(--spacing-4);
+        background: var(--user-bar-background-shade-1);
+        border-bottom: var(--border-width-thick) solid var(--border-color-1);
+        border-radius: corner-values(0 0 var(--border-radius) var(--border-radius));
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+        clip-path: inset(side-values(0px -10px -10px -10px));
+
+    }
+
+    // Search box container
+    &__container {
+        box-sizing: border-box;
+        width: auto;
+        padding: side-values(var(--spacing-1) 0 var(--spacing-1)) var(--spacing-3);
+        margin: var(--border-width-base);
+        cursor: text;
+        background: var(--background-default);
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    // Wrapper element that allows for some additional padding
+    &__label {
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        cursor: text;
+    }
+
+    // Search box
+    .quick-search__field {    // nesting required
+        box-sizing: border-box;
+        flex-grow: 1;
+        min-width: 0;
+        padding: var(--spacing-2);
+        margin: 0;
+        font-size: var(--font-size-regular);
+        background-color: var(--background-default);
+        border: 0;
+        outline: 0;
+    }
+
+    // Search, advanced search buttons wrapper
+    &__controls {
+        box-sizing: border-box;
+        flex-shrink: 0;
+        padding-#{$right}: var(--spacing-3);
+        text-align: $right;
+    }
+
+    // Search, advanced search buttons
+    &__submit,
+    &__advanced {
+        display: inline-block;
+        padding: var(--spacing-1) 0;
+        margin: side-values(0 0 0 6px);
+        font-size: var(--font-size-regular);
+        color: var(--alt-font-color-2);
+        cursor: pointer;
+        background: none;
+        border: 0;
+
+        &:link,
+        &:visited {
+            color: var(--alt-font-color-2);
+        }
+
+        &:hover {
+            color: var(--alt-font-color-1);
+        }
+    }
+}
+
+// Hidden checkbox to show/hide search on mobile
+.mobile-search-checkbox {
+    display: none;
+}
+
+// Mobile earch and close search buttons on small screens
+.mobile-search-button {
+    display: none;
+    box-sizing: border-box;
+    padding: 0 var(--spacing-4);
+    font-size: var(--font-size-large);
+    color: var(--alt-font-color-1);
+    
+    @include bp-medium-max {
+        display: flex;
+        align-items: center;
+    }
+
+    &:hover {
+        background: var(--user-bar-background-shade-1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+// Show quick search if mobile menu button has been clicked
+#show-mobile-search:checked ~ .quick-search {
+
+    @include bp-medium-max {
+        display: block;
+        z-index: 100;
+    }
+}
+
+#show-mobile-search:checked ~ .mobile-search-button {
+    background: var(--user-bar-background-shade-1);
+}

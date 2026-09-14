@@ -1,0 +1,32 @@
+.latest-threads {
+
+    &__item.list__item {
+        padding: var(--spacing-3) var(--spacing-2);
+    }
+
+    &__title {
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__forum,
+    &__last-post,
+    &__stats {
+        margin: 0;
+        font-size: var(--font-size-smaller);
+        line-height: var(--line-height-large);
+        color: var(--alt-font-color-2);
+
+        a:link,
+        a:visited {
+            color: var(--alt-font-color-1);
+        }
+    }
+
+    &__author {
+
+        &:after {
+                content: ",";
+        }
+    }
+}

@@ -15,7 +15,7 @@ trait LegacyCoreAwareTest
     {
         // This is nasty, but the parser has a lot of hidden dependencies upon globals such as `$mybb` and `$plugins`...
         // In the future we should move the parser into the `\MyBB\` namespace and inject these dependencies.
-        defined('MYBB_ROOT') or define('MYBB_ROOT', __DIR__ . '/../../');
+        defined('MYBB_ROOT') or define('MYBB_ROOT', __DIR__ . '/../../public/');
 
         require_once MYBB_ROOT . 'inc/class_core.php';
         require_once MYBB_ROOT . 'inc/class_plugins.php';

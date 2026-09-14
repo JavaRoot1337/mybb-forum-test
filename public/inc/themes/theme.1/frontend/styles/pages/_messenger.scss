@@ -1,0 +1,85 @@
+.messenger {
+
+    .page-header {
+        margin-bottom: var(--spacing-6);
+    }
+
+    &__search {
+        padding-bottom: var(--spacing-5);
+
+        .textbox--large {
+
+            @include bp-small-max {
+                margin-bottom: var(--spacing-3);
+                width: 100%;
+            }
+
+            @include bp-small {
+                margin-#{$right}: var(--spacing-3);
+            }
+        }
+
+        .button {
+            margin-#{$left}: 0;
+        }
+    }
+
+    &__advanced-search {
+
+        @include bp-large {
+            float: $right;
+        }
+    }
+
+    &__space {
+        margin-bottom: var(--spacing-4);
+
+        .messenger-space {
+            display: flex;
+            background-color: var(--background-1);
+            border-radius: var(--border-radius);
+
+            &__used {
+                border-radius: var(--border-radius);
+
+                &--low {
+                    background: var(--success-color);
+                }
+
+                &--medium {
+                    background: var(--moderate-color);
+                }
+
+                &--high {
+                    background: var(--danger-color);
+                }
+            }
+
+            &__unused {
+
+            }
+
+            &__text {
+                display: inline-block;
+                padding: var(--spacing-2) var(--spacing-4);
+
+                &--over-half {
+                    color: var(--invert-font-color);
+                }
+            }
+        }
+    }
+}
+
+.message-list {
+
+    &__actions {
+        padding: var(--spacing-4);
+        text-align: center;
+        border-bottom: var(--border-width-base) solid var(--border-color-2);
+    }
+}
+
+.row .message {
+    padding: 0;
+}

@@ -412,7 +412,7 @@ final class ThemeTest extends TestCase
     protected function setUp(): void
     {
         if (!defined('MYBB_ROOT')) {
-            define('MYBB_ROOT', __DIR__ . '/../../../../');
+            define('MYBB_ROOT', __DIR__ . '/../../../../public/');
         }
     }
 

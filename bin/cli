@@ -12,7 +12,7 @@ use function MyBB\app;
 define("IN_MYBB", 1);
 define("IN_INSTALL", 1);
 define('MINIMUM_PHP_VERSION', '8.2');
-define('MYBB_ROOT', dirname(dirname(__FILE__)) . "/");
+define('MYBB_ROOT', dirname(dirname(__FILE__)) . "/public/");
 define("INSTALL_ROOT", MYBB_ROOT . "/install/");
 
 if (version_compare(PHP_VERSION, MINIMUM_PHP_VERSION, '<')) {

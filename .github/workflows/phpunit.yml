@@ -24,9 +24,9 @@ jobs:
             run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
           - name: Install dependencies
-            run: composer install --prefer-dist --no-progress
+            run: composer install --working-dir=config --prefer-dist --no-progress
 
           - name: Set permissions
             run: chmod +x bin/cli
 
-          - run: inc/vendor/bin/phpunit --display-warnings --display-notices --display-deprecations
+          - run: public/inc/vendor/bin/phpunit --configuration config/phpunit.xml --display-warnings --display-notices --display-deprecations

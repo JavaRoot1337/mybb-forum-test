@@ -1,0 +1,60 @@
+.page-tabs {
+    padding: side-values(var(--spacing-3) var(--spacing-3) 0 var(--spacing-3));
+    margin: side-values(0 0 var(--spacing-5) 0);
+    list-style: none;
+    background: var(--major-title-background);
+    border-radius: var(--border-radius);
+    @include box-shadow;
+
+    &__item {
+        display: inline-block;
+        margin: side-values(0 var(--spacing-3) var(--spacing-3) 0);
+
+        &--active {
+
+            .page-tabs__link {
+                font-weight: var(--font-weight-bold);
+                color: var(--invert-font-color);
+                text-decoration: none;
+                background: var(--header-background);
+
+                &:hover {
+                    background: var(--header-background);
+                }
+            }
+        }
+    }
+
+    &__link {
+        display: inline-block;
+        padding: var(--spacing-2) var(--spacing-3);
+        color: var(--invert-font-color);
+        border-radius: var(--border-radius);
+
+        &:link,
+        &:visited {
+            color: var(--invert-font-color);
+        }
+
+        &:hover {
+            color: var(--invert-font-color);
+            text-decoration: none;
+            background: var(--primary-color-shade-1);
+        }
+    }
+
+    &__icon {
+        margin-#{$right}: var(--spacing-2);
+    }
+
+    &--user-alphabet {
+        padding: side-values(var(--spacing-3) var(--spacing-4) 0 var(--spacing-4));
+        .page-tabs__item {
+            margin: side-values(0 var(--spacing-1) var(--spacing-3) 0);
+        }
+
+        .page-tabs__link {
+            padding: var(--spacing-2) var(--spacing-4);
+        }
+    }
+}

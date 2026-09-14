@@ -1,0 +1,474 @@
+/*  Thread row styles and grid layout
+
+    Thread rows MUST have a modifier in addition to base .thread class
+    .thread--default         for the usual thread listing
+    .thread--search-posts    for post search results
+    .thread--search-threads  for thread search results
+    .thread--compact         for thread listing where there is a sidebar or menu
+    .thread--message         for message listing in private messenger
+*/
+
+// Establish the grid basics shared between column headings and thread rows
+.thread {
+    display: grid;
+    align-items: center;
+    --replies-column-width: 100px;
+    --avatar-width: 40px;
+    --latest-column-width: auto;
+    --text-overflow-max-width: 200px;
+
+    @include bp-medium {
+        --latest-column-width: 160px;
+        --text-overflow-max-width: 180px;   
+    }
+    
+    @include bp-large {
+        --latest-column-width: 200px;
+    }
+
+    &__title {
+        grid-area: title;
+    }
+
+    &__icons {
+        grid-area: icons;
+    }
+
+    &__author {
+        grid-area: author;
+    }
+
+    &__notification {
+        grid-area: author;
+    }
+
+    &__forum {
+        grid-area: forum;
+    }
+    
+    &__message {
+        grid-area: message;
+    }
+
+    &__folder {
+        grid-area: folder;
+    }
+
+    &__pages {
+        grid-area: pages;
+    }
+
+    &__replies {
+        grid-area: replies;
+    }
+
+    &__views {
+        display: none;
+        grid-area: views;
+
+        @include bp-large {
+            display: block;
+        }
+    }
+
+    &__avatar {
+        grid-area: avatar;
+    }
+
+    &__date,
+    &__latest {
+        grid-area: latest;
+    }
+
+    &__checkbox {
+        grid-area: check;
+        text-align: $right;
+    }
+}
+
+// Column heading styles and grid layout
+.column-headings--thread-list {
+    gap: var(--spacing-1) var(--spacing-4);
+
+    @include bp-medium {
+        gap: var(--spacing-1) var(--spacing-5);
+    }
+
+    .thread__latest {
+        text-align: $right;
+    }
+
+    &.thread--default,
+    &.thread--search-posts,
+    &.thread--search-threads {
+        grid-template-columns: auto auto 1fr min-content;
+        grid-template-areas: 
+            "title replies latest check";
+
+        @include bp-medium {
+            grid-template-columns: min-content auto 1fr calc(var(--avatar-width) + var(--spacing-5) + var(--latest-column-width)) min-content;
+            grid-template-areas: 
+                "title author replies latest check";
+            padding-#{$left}: var(--spacing-8);
+
+            .thread__latest {
+                text-align: $left;
+            }
+
+            .sort-results__link {
+                &--title,
+                &--latest {
+                    margin-#{$left}: calc(-1 * var(--spacing-3));
+                }
+            }
+        }
+
+        @include bp-large {
+            grid-template-columns: min-content 1fr var(--replies-column-width) calc(var(--avatar-width) + var(--spacing-5) + var(--latest-column-width)) min-content;
+
+            .sort-results__link--replies {
+                margin-#{$left}: calc(-1 * var(--spacing-3));
+            }
+        }
+
+        .thread__author,
+        .thread__forum,
+        .sort-results__link--author {
+            display: none;
+
+            @include bp-medium {
+                display: inline-block;
+            }
+        }
+    }
+
+    &.thread--search-posts {
+
+        @include bp-medium {
+            grid-template-areas: 
+            "title forum replies latest check";
+        }
+
+        .sort-results__link--author {
+            margin-#{$right}: var(--spacing-5);
+        }
+    }
+
+    &.thread--search-threads {
+
+        @include bp-medium {
+            grid-template-columns: min-content min-content auto 1fr calc(var(--avatar-width) + var(--spacing-5) + var(--latest-column-width)) min-content;
+            grid-template-areas:
+             "title author forum replies latest check";
+        }
+
+        @include bp-large {
+            grid-template-columns: min-content min-content 1fr var(--replies-column-width) calc(var(--avatar-width) + var(--spacing-5) + var(--latest-column-width)) min-content;
+        }
+    }
+
+    &.thread--compact,
+    &.thread--message {
+
+        .thread__latest {
+            text-align: $right;
+
+            @include bp-large {
+                text-align: $left;
+            }
+        }
+    }
+
+    &.thread--compact {
+        grid-template-columns: auto auto 1fr min-content;
+        grid-template-areas: 
+            "title replies latest check";
+
+        .thread__author {
+            display: none;
+        }        
+
+        @include bp-medium {
+            grid-template-columns: var(--avatar-width) auto auto 1fr min-content;
+            grid-template-areas: 
+                "avatar title replies latest check";
+        }
+
+        @include bp-large {
+            grid-template-columns: min-content 1fr var(--replies-column-width) calc(var(--avatar-width) + var(--spacing-5) + var(--latest-column-width)) min-content;
+            grid-template-areas: 
+                "title author replies latest check";
+            padding-#{$left}: var(--spacing-8);
+
+            .thread__author {
+                display: inline-block;
+            }
+        }
+    }
+
+    &.thread--message {
+        grid-template-columns: auto auto 1fr min-content;
+        grid-template-areas:
+            "title author latest check";
+
+        @include bp-medium {
+            grid-template-columns: var(--avatar-width) auto auto 1fr min-content;
+            grid-template-areas:
+            "avatar title author latest check";
+
+            .sort-results__link--title {
+                margin-#{$left}: calc(-1 * var(--spacing-3));
+            }
+        }
+
+        @include bp-large {
+            grid-template-columns: var(--avatar-width) auto 1fr var(--latest-column-width) min-content;
+            grid-template-areas:
+            "avatar title author latest check";
+
+            .sort-results__link--date {
+                margin-#{$left}: calc(-1 * var(--spacing-3));
+            }
+        }
+    }
+}
+
+// Thread list styles
+.thread-list {
+    
+    &--announcements,
+    &--sticky-threads {
+        border-bottom: var(--border-width-thick) solid var(--border-color-2);
+
+        :last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__select-all {
+        display: none;
+        padding: var(--spacing-4);
+        text-align: center;
+        border-bottom: var(--border-width-thick) solid var(--border-color-2);
+    }
+
+    // Thread row styles and grid layout
+    .thread {
+        position: relative;
+        display: grid;
+        gap: var(--spacing-1) var(--spacing-4);
+
+        @include bp-medium {
+            gap: var(--spacing-1) var(--spacing-5);
+        }
+
+        // Default grid layout
+        &--default {
+            grid-template-columns: var(--avatar-width) auto 1fr min-content;
+            grid-template-areas: 
+                "avatar title title check"
+                "avatar replies icons icons"
+                "avatar latest latest latest";
+
+            // Grid layout for medium screens
+            @include bp-medium {
+                grid-template-columns: auto 1fr auto var(--avatar-width) var(--latest-column-width) min-content;
+                grid-template-areas: 
+                    "title title icons avatar latest check"
+                    "author replies pages avatar latest check";
+                padding-#{$left}: var(--spacing-8);
+            }
+
+            // Grid layout for lage screens
+            @include bp-large {
+                grid-template-columns: 1fr auto var(--replies-column-width) var(--avatar-width) var(--latest-column-width) min-content;
+                grid-template-areas:
+                    "title icons replies avatar latest check"
+                    "author pages views avatar latest check";
+            }
+        }
+
+        // Modified grid layout for post search results
+        &--search-posts {
+            grid-template-columns: var(--avatar-width) auto 1fr min-content;
+            grid-template-areas: 
+                "avatar title title check"
+                "avatar forum replies icons"
+                "avatar latest latest latest"
+                "message message message message";
+            
+            @include bp-medium {
+                grid-template-columns: auto 1fr auto var(--avatar-width) var(--latest-column-width) min-content;
+                grid-template-areas: 
+                    "title title icons avatar latest check"
+                    "forum replies pages avatar latest check"
+                    "message message message message message message";
+                padding-#{$left}: var(--spacing-8);
+            }
+
+            @include bp-large {
+                grid-template-columns: 1fr auto var(--replies-column-width) var(--avatar-width) var(--latest-column-width) min-content;
+                grid-template-areas:
+                    "title icons replies avatar latest check"
+                    "forum forum views avatar latest check"
+                    "message message message message message message";
+            }
+        }
+
+        // Modified grid layout for thread search results (no changes from default)
+        &--search-threads {
+            @extend .thread--default;
+        }
+
+        // Compact thread listing (used when there is a sidebar)
+        &--compact {
+            grid-template-columns: var(--avatar-width) auto 1fr min-content;
+            grid-template-areas: 
+                "avatar title title check"
+                "avatar replies icons icons"
+                "avatar latest latest latest"
+                "avatar author author author";
+
+            // Grid layout for medium screens
+            @include bp-medium {
+                grid-template-columns: var(--avatar-width) auto 1fr min-content;
+                grid-template-areas: 
+                    "avatar title title check"
+                    "avatar replies icons icons"
+                    "avatar latest latest latest"
+                    "avatar author author author";
+            }
+
+            @include bp-large {
+                grid-template-columns: 1fr auto var(--replies-column-width) var(--avatar-width) var(--latest-column-width) min-content;
+                grid-template-areas:
+                    "title icons replies avatar latest check"
+                    "author pages views avatar latest check";
+                padding-#{$left}: var(--spacing-8);
+            }
+
+            .thread__author {
+                display: none;
+
+                @include bp-large {
+                    display: block;
+                }
+            }
+
+            a.thread__jump {
+                @include thread-jump($bp-large);
+            }
+
+            .thread__avatar {
+
+                @include bp-large-max {
+                    align-self: self-start;
+                }
+            }
+
+            .latest-post {
+                @include latest-post($bp-large);
+            }
+        }
+
+        // Modified grid layout for messages
+        &--message {
+            grid-template-columns: var(--avatar-width) auto 1fr min-content;
+            grid-template-areas: 
+                "avatar title icons check"
+                "avatar author icons check"
+                "avatar folder icons check"
+                "avatar latest icons check";
+            
+            @include bp-medium {
+                grid-template-columns: var(--avatar-width) auto 1fr auto min-content;
+                grid-template-areas: 
+                    "avatar title title icons check"
+                    "avatar author latest icons check"
+                    "avatar folder folder icons check";
+            }
+
+            @include bp-large {
+                grid-template-columns: var(--avatar-width) 1fr auto var(--latest-column-width) min-content;
+                grid-template-areas: 
+                    "avatar title icons latest check"
+                    "avatar author icons latest check"
+                    "avatar folder icons latest check";
+            }
+
+            .thread__avatar {
+                align-self: self-start;
+            }
+        }
+
+        // Specific styles for most rows
+        &--default,
+        &--search-posts,
+        &--search-threads {
+            
+            .thread__author,
+            .thread__pages {
+                display: none;
+
+                @include bp-medium {
+                    display: block;
+                }
+            }
+
+            a.thread__jump {
+                @include thread-jump($bp-medium);
+            }
+
+            .latest-post {
+                @include latest-post($bp-medium);
+            }
+
+            .thread__avatar {
+                
+                @include bp-medium-max {
+                    align-self: self-start;
+                }
+            }
+        }
+
+        // Specific styles for announcement rows
+        &--announcement {
+
+            .thread__subject {
+                display: block;
+
+                @include bp-medium {
+                    display: inline-block;
+                }
+            }
+
+            .thread__author {
+                display: inline-block;
+                vertical-align: middle;
+
+                @include bp-medium {
+                    margin-#{$left}: var(--spacing-3);
+                }
+            }
+
+            .thread__date {
+                display: inline-block;
+                font-size: var(--font-size-smaller);
+                color: var(--alt-font-color-2);
+                vertical-align: middle;
+            }
+
+            .thread__jump {
+                position: absolute;
+                top: var(--spacing-4);
+                #{$left}: var(--spacing-6);
+                font-size: var(--font-size-small);
+                color: var(--alt-font-color-2);
+
+                @include bp-medium {
+                    #{$left}: var(--spacing-4);
+                }
+            }
+        }
+    }
+}

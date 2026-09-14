@@ -1,0 +1,30 @@
+{% extends '@frontend/layouts/master.twig' %}
+
+{% block head %}
+    <title>{{ lang.javaroot_resources_title }} - {{ mybb.settings.bbname }}</title>
+{% endblock head %}
+
+{% block body %}
+    <section class="block">
+        <div class="javaroot-card javaroot-resource-card">
+            <h1 class="title">{{ lang.javaroot_resources_title }}</h1>
+            <p>{{ lang.javaroot_resources_subtitle }}</p>
+            {% if can_create %}<a class="button button--medium" href="{{ mybb.settings.bburl }}/resources.php?action=create">{{ lang.javaroot_new_resource }}</a>{% endif %}
+        </div>
+    </section>
+    <section class="block">
+        {% if resources is empty %}
+            <div class="javaroot-card javaroot-resource-card">{{ lang.javaroot_resource_empty }}</div>
+        {% else %}
+            <div class="javaroot-resource-grid">
+                {% for resource in resources %}
+                    <article class="javaroot-card javaroot-resource-card">
+                        <h2><a href="{{ mybb.settings.bburl }}/resources.php?rid={{ resource.rid }}">{{ resource.title }}</a></h2>
+                        <p>{{ resource.summary }}</p>
+                        <p class="javaroot-resource-meta">{{ resource.category_name }} · {{ lang.javaroot_author }}: {{ resource.author_name }} · {{ resource.downloads }} {{ lang.javaroot_resource_download }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock body %}

@@ -1,0 +1,48 @@
+{% extends '@frontend/layouts/master.twig' %}
+
+{% block head %}
+    <title>{{ resource.title }} - {{ mybb.settings.bbname }}</title>
+{% endblock head %}
+
+{% block body %}
+    <article class="block javaroot-card javaroot-resource-card">
+        <h1 class="title">{{ resource.title }}</h1>
+        <p class="javaroot-resource-meta">{{ resource.category_name }} · {{ lang.javaroot_author }}: {{ resource.author_name }} · {{ resource.downloads }} {{ lang.javaroot_resource_download }}</p>
+        <p>{{ resource.summary }}</p>
+        <div>{{ resource.description|nl2br }}</div>
+        {% if mybb.user.uid %}
+            <form method="post" action="{{ mybb.settings.bburl }}/resources.php?action=favorite" style="display:inline-block; margin-top: 16px;">
+                <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" /><input type="hidden" name="rid" value="{{ resource.rid }}" />
+                <button class="button button--medium" type="submit">{% if is_favorite %}{{ lang.javaroot_resource_unfavorite }}{% else %}{{ lang.javaroot_resource_favorite }}{% endif %}</button>
+            </form>
+        {% endif %}
+    </article>
+    <section class="block">
+        <h2 class="title">{{ lang.javaroot_resource_version }}</h2>
+        {% for version in versions %}
+            <div class="javaroot-card javaroot-resource-card">
+                <h3>{{ version.version }}</h3>
+                <p>{{ version.minecraft_versions }}</p>
+                {% for file in version.files %}
+                    <a class="button button--medium" href="{{ mybb.settings.bburl }}/resources.php?action=download&amp;fid={{ file.fid }}">{{ lang.javaroot_resource_download }}{% if file.filename %}: {{ file.filename }}{% endif %}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="javaroot-card javaroot-resource-card">{{ lang.javaroot_resource_pending }}</div>
+        {% endfor %}
+    </section>
+    {% if mybb.user.uid and resource.status == 'published' %}
+        <section class="block javaroot-card javaroot-resource-card">
+            <h2 class="title">{{ lang.javaroot_resource_reviews }}</h2>
+            <form method="post" action="{{ mybb.settings.bburl }}/resources.php?action=review">
+                <input type="hidden" name="my_post_key" value="{{ mybb.post_code }}" /><input type="hidden" name="rid" value="{{ resource.rid }}" />
+                <label for="rating">{{ lang.javaroot_resource_rating }}</label><select id="rating" name="rating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+                <textarea class="textarea" name="message" rows="4" placeholder="{{ lang.javaroot_resource_review_text }}"></textarea>
+                <button class="button button--medium" type="submit">{{ lang.javaroot_resource_send_review }}</button>
+            </form>
+            {% for review in reviews %}
+                <div class="javaroot-card javaroot-resource-card"><strong>{{ review.username }}</strong> · {{ review.rating }}/5<p>{{ review.message }}</p>{% if review.author_reply %}<p><strong>{{ lang.javaroot_author }}:</strong> {{ review.author_reply }}</p>{% endif %}</div>
+            {% else %}<p>{{ lang.javaroot_resource_empty }}</p>{% endfor %}
+        </section>
+    {% endif %}
+{% endblock body %}

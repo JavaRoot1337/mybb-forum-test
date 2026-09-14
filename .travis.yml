@@ -36,23 +36,23 @@ before_install:
   - travis_retry composer self-update
 
 install:
-  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
-  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+  - if [[ $setup = 'stable' ]]; then travis_retry composer update --working-dir=config --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
+  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --working-dir=config --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
 
 # Check for PHP syntax errors using PHP's -l flag
 before_script:
-  - '! find . -type f \( -path inc/vendor \) -name "*.php" -exec php -d error_reporting=32767 -l {} \; 2>&1 >&- | grep "^"'
+  - '! find . -type f \( -path public/inc/vendor \) -name "*.php" -exec php -d error_reporting=32767 -l {} \; 2>&1 >&- | grep "^"'
 
 script:
-  - inc/vendor/bin/phpunit
-  - inc/vendor/bin/phpcs
-  - composer validate --strict
+  - public/inc/vendor/bin/phpunit --configuration config/phpunit.xml
+  - public/inc/vendor/bin/phpcs --standard=config/phpcs.xml
+  - composer validate --working-dir=config --strict
 
 test:
   script:
-  - inc/vendor/bin/phpstan analyse -l max -c phpstan.neon --no-interaction --no-progress | tee phpstan_log
+  - public/inc/vendor/bin/phpstan analyse -l max -c config/phpstan.neon --no-interaction --no-progress | tee config/phpstan_log
   artifacts:
     when: always
     expire_in: 1 month
     paths:
-    - phpstan_log
+    - config/phpstan_log

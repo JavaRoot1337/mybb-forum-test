@@ -1,0 +1,58 @@
+
+.pagination {
+    padding: 0;
+    margin: var(--spacing-5) 0;
+    font-size: var(--font-size-small);
+    text-align: center;
+    list-style: none;
+
+    &__pages {
+        margin-#{$right}: var(--spacing-3);
+        color: var(--alt-font-color-1);
+    }
+
+    &__page {
+        display: inline-block;
+        padding: var(--spacing-1) var(--spacing-3);
+        margin-#{$right}: var(--spacing-2);
+        background: var(--background-1);
+        border-radius: var(--border-radius);
+
+        &:hover {
+            color: var(--invert-font-color);
+            text-decoration: none;
+            background: var(--link-hover-color);
+        }
+
+        &--active {
+            background: var(--button-default-color);
+
+            &,
+            &:link,
+            &:visited {
+                color: var(--invert-font-color);
+            }
+
+            &:hover {
+                background: var(--button-default-color);
+            }
+        }
+    }
+
+    &__icon {
+        font-size: var(--font-size-smaller);
+    }
+
+    &--breadcrumb {
+        padding: var(--spacing-3) var(--spacing-4);
+        background: var(--background-default);
+        border: var(--border-width-base) solid var(--border-color-1);
+        border-radius: var(--border-radius);
+        @include box-shadow;
+    }
+
+    @include bp-medium {
+        margin: side-values(var(--spacing-3) 0 var(--spacing-5) 0);
+        text-align: $left;
+    }
+}

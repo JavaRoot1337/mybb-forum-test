@@ -1,0 +1,12 @@
+{
+	"type": "mybb-theme",
+	"version": "1.0.0",
+	"extra": {
+		"inherits": ["core.base"],
+		"properties": {
+			"disporder": [],
+			"editortheme": "mybb.css",
+			"templateset": 0
+		}
+	}
+}

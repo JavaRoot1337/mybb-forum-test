@@ -1,0 +1,23 @@
+.icon {
+
+    &--primary {
+        color: var(--primary-color);
+    }
+
+    &--secondary {
+        color: var(--secondary-color);
+    }
+
+    &--subdued {
+        color: var(--alt-font-color-3);
+    }
+
+    &--link:hover {
+        color: var(--secondary-color);
+    }
+
+    &--small {
+        margin: var(--spacing-1);
+        font-size: var(--font-size-smaller);
+    }
+}

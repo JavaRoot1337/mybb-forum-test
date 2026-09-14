@@ -1,0 +1,29 @@
+.smilie-list {
+    --smilie-column-width: 50px;
+    --smilie-info-column-width: calc(50% - calc(var(--smilie-column-width) + calc(2 * var(--spacing-4))));
+
+    &__legend,
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-4);
+    }
+        
+    &__smilie {
+        flex: 0 0 var(--smilie-column-width);
+        min-width: var(--smilie-column-width);
+        text-align: center;
+    }
+
+    &__name {
+        flex: 1 0 var(--smilie-info-column-width);
+    }
+
+    &__replace {
+        flex: 1 0 var(--smilie-info-column-width);
+
+        &--no-name {
+            flex-basis: auto;
+        }
+    }
+}

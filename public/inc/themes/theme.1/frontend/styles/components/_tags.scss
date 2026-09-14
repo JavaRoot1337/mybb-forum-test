@@ -1,0 +1,50 @@
+.tag {
+    display: inline-block;
+    padding: var(--spacing-1) var(--spacing-3);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    color: var(--alt-font-color-1);
+    text-transform: uppercase;
+    background: var(--background-3);
+    border-radius: var(--border-radius);
+
+    &--float {
+        float: $right;
+        margin-#{$left}: var(--spacing-2);
+    }
+
+    &--good {
+        color: var(--invert-font-color);
+        background-color: var(--success-color);
+    }
+
+    &--medium {
+        color: var(--invert-font-color);
+        background-color: var(--moderate-color);
+    }
+
+    &--bad {
+        color: var(--invert-font-color);
+        background-color: var(--danger-color);
+    }
+
+    &--thread-status {
+        margin-#{$left}: var(--spacing-2);
+        font-size: var(--font-size-smallest);
+    }
+
+    &--post-status {
+        margin-bottom: var(--spacing-3);
+    }
+
+    &--deleted,
+    &--private {
+        color: var(--status-deleted-font-color);
+        background-color: var(--status-deleted-background-color);
+    }
+
+    &--awaiting-approval {
+        color: var(--status-pending-font-color);
+        background-color: var(--status-pending-background-color);
+    }
+}

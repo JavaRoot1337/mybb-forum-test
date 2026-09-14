@@ -1,0 +1,141 @@
+html, button, input, select, textarea {
+    color: var(--font-color);
+    word-wrap: break-word;
+}
+
+::selection {
+    color: var(--invert-font-color);
+    background: var(--secondary-color);
+    text-shadow: none;
+}
+
+body {
+    margin: 0;
+    font: var(--font-size-base)/var(--line-height-base) var(--font-stack);
+    background: var(--content-background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+}
+
+input, select, textarea, button {
+    font: var(--font-size-base) var(--font-stack);
+}
+
+a:link,
+a:visited {
+    color: var(--link-default-color);
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+a:focus,
+button:focus {
+    outline: 0;
+}
+
+hr {
+    display: block;
+    height: var(--border-width-base);
+    padding: 0;
+    margin: 1em 0;
+    border: 0;
+    border-top: var(--border-width-base) solid var(--border-color-2);
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.wrapper {
+    width: 94%;
+    margin: 0 3%;
+
+    &--main {
+        @include clearfix();
+    }
+
+    @include bp-large {
+        max-width: 1250px;
+        margin: 0 auto;
+    }
+}
+
+.main {
+    padding: side-values(var(--spacing-6) 0 var(--spacing-4) 0);
+
+    .page-columns {
+        display: grid;
+        gap: var(--spacing-3) var(--spacing-7);
+
+        &--menu {
+            grid-template-areas:
+                "menu"
+                "content";
+
+            @include bp-medium {
+                grid-template-columns: minmax(200px, 1fr) 4fr;
+                grid-template-areas: "menu content";
+            }
+        }
+
+        &--sidebar {
+            grid-template-areas:
+                "content"
+                "sidebar";
+
+            @include bp-medium {
+                grid-template-columns: 2fr 1fr;
+                grid-template-areas: "content sidebar";
+            }
+        }
+    }
+
+    .page-content {
+        grid-area: content;
+
+        &--centered {
+
+            @include bp-medium {
+                width: 60%;
+                margin: auto auto;
+            }
+        }
+    }
+
+    .page-sidebar {
+        grid-area: sidebar;
+    }
+
+    .page-content--menu .page-header {
+        margin-bottom: var(--spacing-5);
+    }
+
+    .page-header {
+        padding-bottom: 0;
+        margin-bottom: var(--spacing-6);
+        border-bottom: var(--border-width-page-header) solid var(--primary-color);
+
+        .page-description {
+            margin: side-values(0 0 var(--spacing-4) 0);
+            font-size: var(--font-size-small);
+            color: var(--alt-font-color-1);
+        }
+    }
+}

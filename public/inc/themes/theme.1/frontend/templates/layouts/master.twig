@@ -1,0 +1,21 @@
+{% set javaroot_theme = get('javaroot_theme')|default('ordinary') %}
+{% set javaroot_scheme = javaroot_theme == 'ordinary' ? 'light' : javaroot_theme %}
+<!doctype html>
+<html class="no-js scheme-{{ javaroot_scheme }}" data-javaroot-theme="{{ javaroot_theme }}"{% if lang.settings.rtl %} dir="rtl"{% endif %}{% if lang.settings.htmllang %} lang="{{ lang.settings.htmllang }}"{% endif %}>
+<head>
+    {% block head %}
+        <title>MyBB</title>
+    {% endblock head %}
+
+    {% include 'partials/headerinclude.twig' %}
+
+    {% block jscripts %}{% endblock %}
+</head>
+<body>
+{% block header %}{% include 'partials/header.twig' %}{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% block footer %}{% include 'partials/footer.twig' %}{% endblock %}
+</body>
+</html>

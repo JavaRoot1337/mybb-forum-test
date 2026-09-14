@@ -1,0 +1,98 @@
+<div id="container">
+    <a name="top" id="top"></a>
+
+    <header class="header">
+        <div class="wrapper wrapper--header">
+            <h1 class="header__title">
+                <a href="{{ mybb.settings.bburl }}/index.php" class="logo logo--light  header__title__logo">
+                    <span class="logo__icon">
+                        {% include 'partials/logo.svg' %}
+                    </span>
+                    <span class="logo__text">{{ mybb.settings.bbname }}</span>
+                </a>
+            </h1>
+            <input type="checkbox" class="menu-checkbox" id="show-mobile-menu">
+            <label class="menu-button" for="show-mobile-menu">{{ include('partials/icon.twig', {icon: 'bars'}, with_context = false) }}</label>
+            <nav class="main-menu">
+                <ul class="main-menu__links">
+                    {% apply spaceless %}
+                    <li class="main-menu__item{% if constant("THIS_SCRIPT") == "resources.php" %} main-menu__item--active{% endif %}">
+                        <a href="{{ mybb.settings.bburl }}/resources.php" class="main-menu__link">
+                            {{ include('partials/icon.twig', {icon: 'puzzle-piece', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                            <span class="main-menu__text">{{ lang.javaroot_resources }}</span>
+                        </a>
+                    </li>
+                    <li class="main-menu__item">
+                        <a href="{{ mybb.settings.bburl }}/search.php?action=getnew" class="main-menu__link">
+                            {{ include('partials/icon.twig', {icon: 'comments', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                            <span class="main-menu__text">{{ lang.javaroot_new_posts }}</span>
+                        </a>
+                    </li>
+                    <li class="main-menu__item{% if constant("THIS_SCRIPT") == "search.php" %} main-menu__item--active{% endif %}">
+                        <a href="{{ mybb.settings.bburl }}/search.php" class="main-menu__link">
+                            {{ include('partials/icon.twig', {icon: 'search', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                            <span class="main-menu__text">{{ lang.javaroot_search }}</span>
+                        </a>
+                    </li>
+                    <li class="main-menu__item">
+                        <a href="{{ mybb.settings.bburl }}/resources.php?sort=reviews" class="main-menu__link">
+                            {{ include('partials/icon.twig', {icon: 'star', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                            <span class="main-menu__text">{{ lang.javaroot_reviews }}</span>
+                        </a>
+                    </li>
+                    <li class="main-menu__item">
+                        <a href="{{ mybb.settings.bburl }}/misc.php?action=help" class="main-menu__link">
+                            {{ include('partials/icon.twig', {icon: 'book', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                            <span class="main-menu__text">{{ lang.javaroot_rules }}</span>
+                        </a>
+                    </li>
+                    {% if mybb.settings.portal %}
+                        <li class="main-menu__item{% if constant("THIS_SCRIPT") == "portal.php" %} main-menu__item--active{% endif %}">
+                            <a href="{{ mybb.settings.bburl }}/portal.php" class="main-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'newspaper', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                                <span class="main-menu__text">{{ lang.toplinks_portal }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if mybb.settings.enablememberlist and mybb.usergroup.canviewmemberlist %}
+                        <li class="main-menu__item{% if constant("THIS_SCRIPT") == "memberlist.php" %} main-menu__item--active{% endif %}">
+                            <a href="{{ mybb.settings.bburl }}/memberlist.php" class="main-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'users', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                                <span class="main-menu__text">{{ lang.toplinks_memberlist }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if mybb.settings.enablecalendar and mybb.usergroup.canviewcalendar %}
+                        <li class="main-menu__item{% if constant("THIS_SCRIPT") == "calendar.php" %} main-menu__item--active{% endif %}">
+                            <a href="{{ mybb.settings.bburl }}/calendar.php" class="main-menu__link">
+                                {{ include('partials/icon.twig', {icon: 'calendar', class: 'main-menu__icon fa-fw'}, with_context = false) }}
+                                <span class="main-menu__text">{{ lang.toplinks_calendar }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% endapply %}
+                </ul>
+           </nav>
+       </div>
+   </header>
+   <nav class="user-bar">
+       <div class="wrapper wrapper--user-bar user-bar__wrapper">
+            {% if mybb.user.uid > 0 %}
+                {% include 'header/welcomeblock_member.twig' %}
+            {% else %}
+                {% include 'header/welcomeblock_guest.twig' %}
+            {% endif %}
+            {% include 'header/quicksearch.twig' %}
+        </div>
+    </nav>
+    <div class="main">
+        <div class="wrapper wrapper--main">
+            <div id="content">
+                {% for template, options in header_messages() %}
+                    {% if template matches '/^\\d+$/' %}
+                        {% include 'messages/base.twig' %}
+                    {% else %}
+                        {% include 'messages/' ~ template ~ '.twig' %}
+                    {% endif %}
+                {% endfor %}
+                {{ build_breadcrumb_navigation('breadcrumb--header') }}

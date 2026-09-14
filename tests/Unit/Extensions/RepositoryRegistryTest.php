@@ -182,7 +182,7 @@ final class RepositoryRegistryTest extends TestCase
     protected function setUp(): void
     {
         if (!defined('MYBB_ROOT')) {
-            define('MYBB_ROOT', dirname(__DIR__, 3) . DIRECTORY_SEPARATOR);
+            define('MYBB_ROOT', dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
         }
     }
 

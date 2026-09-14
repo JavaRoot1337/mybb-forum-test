@@ -1,0 +1,234 @@
+.change-avatar {
+
+    .avatar-container {
+        float: $right;
+        margin: side-values(0 0 var(--spacing-6) var(--spacing-6));
+        @include avatar(100);
+    }
+
+    .change-avatar__description {
+        padding: side-values(0 0 0 var(--spacing-2));
+        margin: side-values(0 0 var(--spacing-3) 0);
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-1);
+    }
+}
+
+.account-dashboard {
+    display: flex;
+    gap: var(--spacing-5);
+    padding: var(--spacing-5);
+
+    .avatar-profile-link {
+        @include avatar(100);
+    }
+}
+
+.buddy-ignore-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @include bp-small {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__user {
+        box-sizing: border-box;
+        padding: var(--spacing-3);
+        border-bottom: var(--border-width-base) solid var(--border-color-1);
+
+        @include bp-small {
+            width: 50%;
+            border: none;
+        }
+
+        @include bp-large {
+            width: 33%;
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    &__delete-link {
+        float: $right;
+
+        @include bp-small {
+            float: none;
+            margin-#{$left}: var(--spacing-3);
+        }
+
+        &:link,
+        &:visited {
+            color: var(--alt-font-color-1);
+        }
+
+        &:hover {
+            color: var(--danger-color);
+        }
+    }
+}
+
+.buddy-request {
+
+    &__username {
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__date {
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+    }
+}
+
+.attachment {
+    grid-template-columns: var(--spacing-5) 1fr min-content;
+    grid-template-areas:
+        "icon primary check"
+        "icon secondary secondary";
+
+    @include bp-small {
+        grid-template-columns: var(--spacing-5) 1fr 1fr min-content;
+        grid-template-areas: 
+            "icon primary secondary check";
+    }
+
+    &__icon {
+        grid-area: icon;
+        justify-self: center;
+        align-self: self-start;
+    }
+
+    &__file-name {
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__size-downloads,
+    &__date {
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+    }
+
+    &__post {
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+    }
+}
+
+.draft {
+
+    &__subject {
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__location,
+    &__date {
+        margin: 0;
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+
+        a:link,
+        a:visited {
+            color: var(--alt-font-color-1);
+        }
+    }
+}
+
+.user-group {
+
+    &__name {
+        display: inline-block;
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__display-group {
+        margin-#{$left}: var(--spacing-3);
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+    }
+
+    &__user-title,
+    &__description,
+    &__leaders {
+        margin: side-values(var(--spacing-2) 0 0 0);
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-1);
+    }
+
+    &__message {
+        margin: side-values(var(--spacing-2) 0 0 0);
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-2);
+    }
+}
+
+.join-request {
+
+    &__username {
+        margin: 0;
+        font-size: var(--font-size-regular);
+    }
+
+    &__reason {
+        margin: 0;
+        font-size: var(--font-size-small);
+        color: var(--alt-font-color-1);
+    }
+}
+
+.security-log {
+    gap: var(--spacing-1) var(--spacing-5);
+
+    &--column-headings {
+        grid-template-columns: auto auto 1fr;
+        grid-template-areas: "activity date ip";
+    }
+
+    &--row {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: 
+            "activity ip"
+            "date ip";
+
+        .security-log__date {
+
+            @include bp-large-max {
+                font-size: var(--font-size-small);
+                color: var(--alt-font-color-2);
+            }
+        }
+    }
+
+    @include bp-large {
+        grid-template-columns: 4fr 3fr 3fr;
+        grid-template-areas: "activity date ip";
+    }
+
+    &__activity {
+        grid-area: activity;
+    }
+
+    &__date {
+        grid-area: date;
+
+        @include bp-large {
+            justify-self: center;
+        }
+    }
+
+    &__ip {
+        grid-area: ip;
+        justify-self: self-end;
+
+        @include bp-large {
+            justify-self: center;
+        }
+    }
+}

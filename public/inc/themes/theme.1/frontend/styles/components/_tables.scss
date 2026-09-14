@@ -1,0 +1,21 @@
+.table {
+    width: 100%;
+
+    &.table--bordered {
+        border-radius: var(--border-radius);
+        border-collapse: separate;
+
+        td {
+            border-bottom: var(--border-width-base) solid var(--border-color-1);
+        }
+    }
+
+    td, th {
+        padding: var(--spacing-3);
+    }
+
+    thead {
+        color: var(--invert-font-color);
+        background: var(--primary-color);
+    }
+}

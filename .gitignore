@@ -1,24 +1,24 @@
 # Config Files
-inc/config.php
-inc/config.default.php
-inc/settings.php
+public/inc/config.php
+public/inc/config.default.php
+public/inc/settings.php
 
 # MyBB Admin Backups
-admin/backups/*
-!admin/backups/index.html
+public/admin/backups/*
+!public/admin/backups/index.html
 
 # Cache Directory
-cache/*
+public/cache/*
 
 # Uploads Directory
-uploads/*
+public/uploads/*
 
 # MyBB Misc
-install/lock*
-error.log
-.htaccess
-!admin/backups/.htaccess
-!inc/.htaccess
+public/install/lock*
+public/error.log
+public/.htaccess
+!public/admin/backups/.htaccess
+!public/inc/.htaccess
 .htgroup
 .htpasswd
 
@@ -51,6 +51,14 @@ Thumbs.db
 *.orig
 
 # Distribution
-inc/vendor
-inc/checksums
+public/inc/vendor
+public/inc/checksums
 .source-commit
+
+# Local PHP runtime
+tools/runtime/php/
+tools/runtime/composer/
+tools/runtime/packages/
+
+# Resource files stored outside the web root
+javaroot-storage/
